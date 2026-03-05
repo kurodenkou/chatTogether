@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>chatTogether</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Join Screen ─────────────────────────────────────────── -->
+  <div id="join-screen" class="screen active">
+    <div class="join-card">
+      <div class="logo">
+        <span class="logo-chat">chat</span><span class="logo-together">Together</span>
+      </div>
+      <p class="tagline">Real-time chat. No accounts. No data stored.</p>
+
+      <form id="join-form">
+        <label for="input-name">Your name</label>
+        <input
+          id="input-name"
+          type="text"
+          placeholder="e.g. Alice"
+          maxlength="32"
+          autocomplete="off"
+          required
+        />
+
+        <label for="input-room">Room</label>
+        <input
+          id="input-room"
+          type="text"
+          placeholder="e.g. project-alpha"
+          maxlength="64"
+          autocomplete="off"
+          required
+        />
+
+        <button type="submit" class="btn-primary">Join Room &rarr;</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Chat Screen ─────────────────────────────────────────── -->
+  <div id="chat-screen" class="screen">
+
+    <header class="chat-header">
+      <div class="header-left">
+        <span class="logo-sm"><span class="logo-chat">chat</span><span class="logo-together">Together</span></span>
+        <span class="room-badge" id="room-label">#general</span>
+      </div>
+      <div class="header-right">
+        <button id="btn-users" class="btn-icon" title="Show participants" aria-label="Participants">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/>
+          </svg>
+          <span id="user-count">0</span>
+        </button>
+        <button id="btn-leave" class="btn-icon btn-leave" title="Leave room" aria-label="Leave">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Users sidebar (toggle) -->
+    <aside id="users-panel" class="users-panel hidden">
+      <h3>In this room</h3>
+      <ul id="users-list"></ul>
+    </aside>
+
+    <main id="messages" class="messages" role="log" aria-live="polite"></main>
+
+    <footer class="chat-footer">
+      <form id="message-form">
+        <input
+          id="input-message"
+          type="text"
+          placeholder="Type a message…"
+          maxlength="2000"
+          autocomplete="off"
+          aria-label="Message"
+        />
+        <button type="submit" class="btn-send" aria-label="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </form>
+    </footer>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
